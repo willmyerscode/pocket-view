@@ -4,12 +4,23 @@
 * Development Lead, Abi Bacon
 **/
 
+/*
+--list-section-simple-card-description-color:;
+--list-section-simple-card-description-link-color
+--list-section-simple-card-button-text-color
+--list-section-simple-card-title-color
+--list-section-simple-card-button-background-color
+--list-section-simple-card-color
+*/
+
 [data-wm-plugin="pocket-view"] .pocket-view-wrapper {
   display: grid;
   grid-template-columns: 0.75fr 2fr;
-  gap: var(--pocket-button-content-gap, 0px);
+  gap: var(--pocket-button-content-gap, 17px);
 }
 
+
+/*Button List*/
 [data-wm-plugin="pocket-view"] .pocket-view-wrapper .button-list-wrapper {
   display: flex;
   flex-direction: column;
@@ -25,24 +36,27 @@
   text-align: var(--pocket-button-text-align, center);
 }
 
-[data-wm-plugin="pocket-view"] .pocket-view-wrapper .pocket-button.active {
-  background: var(--pocket-button-active-background, var(--list-section-simple-card-title-color, black));
-}
-
 [data-wm-plugin="pocket-view"] .pocket-button .button-text {
   color: var(--pocket-button-title-color, var(--list-section-simple-card-title-color, black));
+  margin: var(--pocket-button-title-margin, 0.2em);
 }
 
 [data-wm-plugin="pocket-view"] .pocket-button .button-description {
   color: var(--pocket-button-description-color, var(--list-section-simple-card-description-color, black));
 }
-
-[data-wm-plugin="pocket-view"] .pocket-view-wrapper .pocket-button:hover .button-text {
-  color: var(--pocket-button-hover-title-color, var(--pocket-button-active-text-color, var(--list-section-simple-card-color, white)));
+[data-wm-plugin="pocket-view"] .pocket-button .button-description >* {
+  margin: var(--pocket-button-description-margin, 0.2em);
 }
 
-[data-wm-plugin="pocket-view"] .pocket-view-wrapper .pocket-button:hover .button-description {
-  color: var(--pocket-button-hover-description-color, var(--pocket-button-active-text-color, var(--list-section-simple-card-color, white)));
+/*Hover*/
+[data-wm-plugin="pocket-view"] .pocket-view-wrapper .pocket-button:hover {
+  opacity: var(--pocket-button-hover-title-opacity, 0.7);
+}
+
+/*Active*/
+[data-wm-plugin="pocket-view"] .pocket-view-wrapper .pocket-button.active {
+  opacity: 1;
+  background: var(--pocket-button-active-background, var(--list-section-simple-card-title-color, black));
 }
 
 [data-wm-plugin="pocket-view"] .pocket-view-wrapper .pocket-button.active .button-text {
@@ -53,22 +67,13 @@
   color: var(--pocket-button-active-description-color, var(--list-section-simple-card-color, white));
 }
 
-[data-wm-plugin="pocket-view"] .pocket-button .button-text {
-  margin: var(--pocket-button-title-margin, 0.2em);
-}
 
-[data-wm-plugin="pocket-view"] .pocket-button .button-description >* {
-  margin: var(--pocket-button-description-margin, 0.2em);
-}
-
+/*Content*/
 [data-wm-plugin="pocket-view"] .pocket-view-wrapper .pocket-content-container {
   overflow: hidden;
-  border: var(--pocket-content-border-width, 1px) var(--pocket-content-border-type, solid) var(--pocket-content-border-color, var(--list-section-simple-card-description-color, black));
   display: flex;
   height: 100%;
   align-self: var(--pocket-content-vertical-alignment, center);
-  background: var(--pocket-content-container-background, var(--list-section-simple-card-color, white));
-  border-radius: var(--pocket-content-border-radius, 0px);
 }
 
 [data-wm-plugin="pocket-view"] .pocket-view-wrapper .pocket-content-wrapper {
@@ -86,13 +91,22 @@
   flex-grow: 1;
   flex-shrink: 0;
   opacity: 0;
+  visibility: hidden;
+  border-width: var(--pocket-content-border-width, 0px);
+  border-style: var(--pocket-content-border-type, solid);
+  border-color: var(--pocket-content-border-color, var(--list-section-simple-card-title-color, black));
+  border-radius: var(--pocket-content-border-radius, 0px);
+  background: var(--pocket-content-container-background, var(--list-section-simple-card-color, white));
+  border-radius: var(--pocket-content-border-radius, 0px);
 }
 
 [data-wm-plugin="pocket-view"] .pocket-view-wrapper .content-item.active {
   opacity: 1;
+  visibility: visible;
 }
 
-[data-wm-plugin="pocket-view"] .pocket-view-wrapper .content-description > :first-child {
+[data-wm-plugin="pocket-view"] .pocket-view-wrapper .content-description > :first-child,
+[data-wm-plugin="pocket-view"] .pocket-accordion .content-description > :first-child {
   margin-top: 0px;
 }
 
@@ -128,23 +142,29 @@
   }
 }
 
-[data-wm-plugin="pocket-view"].minimal .pocket-view-wrapper .pocket-button {
-  border: 0px !important;
+
+/* Minimal */
+[data-wm-plugin="pocket-view"][data-preset-style="minimal"] .pocket-view-wrapper {
+  gap: var(--pocket-button-content-gap, 0px);
+}
+[data-wm-plugin="pocket-view"][data-preset-style="minimal"] .pocket-view-wrapper .pocket-button {
+  border: 0px ;
   position: relative;
-  padding-right: 4.7em !important;
-  text-align: right !important;  
+  padding-right: 4.7em ;
+  text-align: right;  
 }
 
-[data-wm-plugin="pocket-view"].minimal .pocket-button {
+[data-wm-plugin="pocket-view"][data-preset-style="minimal"] .pocket-button {
   background: transparent;
 }
-
-[data-wm-plugin="pocket-view"].minimal .pocket-view-wrapper .pocket-button.active {
-  background: transparent !important;
+[data-wm-plugin="pocket-view"][data-preset-style="minimal"] .pocket-view-wrapper .pocket-button.active {
+  background: transparent;
+}
+[data-wm-plugin="pocket-view"][data-preset-style="minimal"] .pocket-view-wrapper .pocket-button.active >* {
+  color: var(--pocket-minimal-active-button-color, var(--list-section-simple-card-description-color, black));  
 }
 
-
-[data-wm-plugin="pocket-view"].minimal .pocket-view-wrapper .pocket-button.active::after {
+[data-wm-plugin="pocket-view"][data-preset-style="minimal"] .pocket-view-wrapper .pocket-button.active::after {
   width: 4.5em;
   background: black;
   height: 1px;
@@ -156,61 +176,58 @@
   transform: translateY(-50%);
 }
 
-[data-wm-plugin="pocket-view"].minimal .pocket-view-wrapper .pocket-content-container {
-  border: 0px !important;
-  border-left: 1px solid black !important;
-  border-radius: 0px !important;
-  background: transparent !important;
+[data-wm-plugin="pocket-view"][data-preset-style="minimal"] .pocket-view-wrapper .pocket-content-container {
+  border: 0px;
+  border-left: 1px solid black;
+  border-radius: 0px;
+  background: transparent;
+}
+[data-wm-plugin="pocket-view"][data-preset-style="minimal"] .pocket-view-wrapper .content-item {
+  background: var(--pocket-content-container-background, transparent);
+
 }
   
-  @media only screen and (max-width: 766px) {
-    
-    [data-wm-plugin="pocket-view"].minimal .pocket-view-wrapper .pocket-button {
-      text-align: center !important;
-      padding: var(--pocket-button-padding, 17px) !important;
-    }
-   
-    [data-wm-plugin="pocket-view"].minimal .pocket-view-wrapper .pocket-button.active {
-     border: var(--pocket-minimal-active-button-border-width, 1px) var(--pocket-minima-active-button-border-type, solid) var(--pocket-minimal-active-button-border-color, var(--list-section-simple-card-description-color, black)) !important;
+@media only screen and (max-width: 766px) {
+  
+  [data-wm-plugin="pocket-view"][data-preset-style="minimal"] .pocket-view-wrapper .pocket-button {
+    text-align: center;
+    padding: var(--pocket-button-padding, 17px);
   }
-    
-    [data-wm-plugin="pocket-view"].minimal .pocket-view-wrapper .pocket-button.active >* {
-     color: var(--pocket-minimal-active-button-color, var(--list-section-simple-card-description-color, black)) !important;
-    }
-    
-    [data-wm-plugin="pocket-view"].minimal .pocket-view-wrapper .pocket-button.active::after {
-      display: none !important;
-    }
+  
+  [data-wm-plugin="pocket-view"][data-preset-style="minimal"] .pocket-view-wrapper .pocket-button.active {
+    border: var(--pocket-minimal-active-button-border-width, 1px) var(--pocket-minima-active-button-border-type, solid) var(--pocket-minimal-active-button-border-color, var(--list-section-simple-card-description-color, black)) !important;
+}
+  
+  [data-wm-plugin="pocket-view"][data-preset-style="minimal"] .pocket-view-wrapper .pocket-button.active >* {
+    color: var(--pocket-minimal-active-button-color, var(--list-section-simple-card-description-color, black)) !important;
+  }
+  
+  [data-wm-plugin="pocket-view"][data-preset-style="minimal"] .pocket-view-wrapper .pocket-button.active::after {
+    display: none;
   }
 
-
-[data-wm-plugin="pocket-view"].block .pocket-view-wrapper .button-list-wrapper button:hover {
-  background: var(--pocket-button-hover-background, var(--pocket-button-active-background, var(--list-section-simple-card-description-color, black)));
 }
 
-[data-wm-plugin="pocket-view"].bubble .pocket-view-wrapper {
+/* Bubble */
+[data-wm-plugin="pocket-view"][data-preset-style="bubble"] .pocket-view-wrapper {
   gap: var(--pocket-button-content-gap, 17px);
 }
 
-[data-wm-plugin="pocket-view"].bubble .pocket-view-wrapper .button-list-wrapper {
+[data-wm-plugin="pocket-view"][data-preset-style="bubble"] .pocket-view-wrapper .button-list-wrapper {
   gap: var(--pocket-button-list-gap, 17px);
 }
 
-[data-wm-plugin="pocket-view"].bubble .pocket-view-wrapper .button-list-wrapper button {
+[data-wm-plugin="pocket-view"][data-preset-style="bubble"] .pocket-view-wrapper .button-list-wrapper button {
   border-radius: var(--pocket-button-border-radius, 17px);
   border: var(--pocket-button-border-width, 1px), var(--pocket-button-border-type, solid), var(--pocket-button-border-color, var(--list-section-simple-card-description-color, black));
 }
 
-[data-wm-plugin="pocket-view"].bubble .pocket-view-wrapper .button-list-wrapper button:hover {
-  background: var(--pocket-button-hover-background, var(--pocket-button-active-background, var(--list-section-simple-card-description-color, black)));
-}
-
-
-[data-wm-plugin="pocket-view"].bubble .pocket-view-wrapper .pocket-content-container {
+[data-wm-plugin="pocket-view"][data-preset-style="bubble"] .pocket-view-wrapper .pocket-content-container .content-item {
   border-radius: var(--pocket-content-border-radius, 17px);
+  border: var(--pocket-button-border-width, 1px), var(--pocket-button-border-type, solid), var(--pocket-button-border-color, var(--list-section-simple-card-description-color, black));
 }
 
-[data-wm-plugin="pocket-view"].bubble .pocket-view-wrapper .image-button img {
+[data-wm-plugin="pocket-view"][data-preset-style="bubble"] .pocket-view-wrapper .image-button img {
   border-radius: var(--pocket-image-button-border-radius, 12px);
 }
 
@@ -229,66 +246,75 @@
   overflow: hidden;
 }
 
+
+/* Mobile Scroll */
+
 @media only screen and (max-width: 766px) {
-  [data-wm-plugin="pocket-view"].mobile-scroll .pocket-view-wrapper .button-container {
+  [data-wm-plugin="pocket-view"][data-mobile-layout="scroll"] .pocket-view-wrapper .button-container {
     overflow: scroll;
   }
   
-  [data-wm-plugin="pocket-view"].mobile-scroll .pocket-view-wrapper .button-list-wrapper {
+  [data-wm-plugin="pocket-view"][data-mobile-layout="scroll"] .pocket-view-wrapper .button-list-wrapper {
     flex-direction: row !important;
     justify-content: start;
     gap: 0px;
   }
   
-  [data-wm-plugin="pocket-view"].mobile-scroll .pocket-view-wrapper .pocket-button >* {
+  [data-wm-plugin="pocket-view"][data-mobile-layout="scroll"] .pocket-view-wrapper .pocket-button >* {
   width: max-content;
 }
 
-  [data-wm-plugin="pocket-view"].mobile-scroll .pocket-view-wrapper .button-description {
+  [data-wm-plugin="pocket-view"][data-mobile-layout="scroll"] .pocket-view-wrapper .button-description {
     display: none;
   }
 
-  [data-wm-plugin="pocket-view"].mobile-scroll.bubble .pocket-view-wrapper {
+  [data-wm-plugin="pocket-view"][data-mobile-layout="scroll"][data-preset-style="bubble"] .pocket-view-wrapper {
     gap: 0px;
   }
 }
 
+
+/* Accordion */
 [data-wm-plugin="pocket-view"] .pocket-accordion {
   display: none;
 }
 
 @media only screen and (max-width: 766px) {
-  [data-wm-plugin="pocket-view"].accordion .pocket-view-wrapper {
+  [data-wm-plugin="pocket-view"][data-mobile-layout="accordion"] .pocket-view-wrapper {
     display: none;
   }
 
-  [data-wm-plugin="pocket-view"].accordion .pocket-accordion {
+  [data-wm-plugin="pocket-view"][data-mobile-layout="accordion"] .pocket-accordion {
     display: block;
   }
 
-  [data-wm-plugin="pocket-view"].accordion .pocket-accordion .pocket-button {
+  [data-wm-plugin="pocket-view"][data-mobile-layout="accordion"] .pocket-accordion .pocket-button {
     width: 100%;
     border-bottom: var(--pocket-button-border-width, 1px) var(--pocket-button-border-type, solid) var(--pocket-button-border-color, var(--list-section-simple-card-description-color, black));
   }
 
-  [data-wm-plugin="pocket-view"].accordion .pocket-accordion .pocket-button .button-description {
+  [data-wm-plugin="pocket-view"][data-mobile-layout="accordion"] .pocket-accordion .pocket-button .button-description {
     display: none;
   }
 
-  [data-wm-plugin="pocket-view"].accordion .pocket-accordion .pocket-button.active .button-description {
+  [data-wm-plugin="pocket-view"][data-mobile-layout="accordion"] .pocket-accordion .pocket-button.active .button-description {
     display: block;
   }
 
-  [data-wm-plugin="pocket-view"].accordion .pocket-accordion .pocket-button.active {
+  [data-wm-plugin="pocket-view"][data-mobile-layout="accordion"] .pocket-accordion .pocket-button.active {
     border-bottom: none;
   }
   
-  [data-wm-plugin="pocket-view"].accordion .pocket-accordion .content-item {
+  [data-wm-plugin="pocket-view"][data-mobile-layout="accordion"] .pocket-accordion .content-item {
     display: none;
+    text-align: var(--pocket-accordion-content-text-align, center);
   }
 
-  [data-wm-plugin="pocket-view"].accordion .pocket-accordion .content-item.active {
+  [data-wm-plugin="pocket-view"][data-mobile-layout="accordion"] .pocket-accordion .content-item.active {
     display: flex;
+  }
+  [data-wm-plugin="pocket-view"][data-mobile-layout="accordion"] .pocket-accordion .content-description {
+    padding: var(--pocket-accordion-content-padding, 17px);
   }
 }
 
