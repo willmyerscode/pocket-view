@@ -692,7 +692,7 @@ class PocketView {
       el.wmPocketView = new PocketView(el);
     });
   }
-  window.wmPocketView = {
+  window.wmPocketView = { 
     init: () => initPocketView(),
   };
   window.wmPocketView.init();
