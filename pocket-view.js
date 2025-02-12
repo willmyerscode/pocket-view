@@ -288,10 +288,12 @@ class PocketView {
 
       let description = item.description;
 
+      console.log(item.description);
+
       // Step 1: Remove the outer p tags while preserving content
       description = description.replace(
-        /<p data-rte-preserve-empty="true" style="white-space:pre-wrap;">|<\/p>/g,
-        "\n"
+        /^<p data-rte-preserve-empty="true" style="white-space:pre-wrap;">([\s\S]*)<\/p>$/,
+        '$1'
       );
 
       // Step 2: Convert encoded HTML tags to actual elements
