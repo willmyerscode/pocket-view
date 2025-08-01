@@ -166,7 +166,7 @@
 
 [data-wm-plugin="pocket-view"][data-preset-style="minimal"] .pocket-view-wrapper .pocket-button.active::after {
   width: 4.5em;
-  background: black;
+  background: var(--pocket-minimal-line-color, black);
   height: 1px;
   content: '';
   display: block;
@@ -178,7 +178,7 @@
 
 [data-wm-plugin="pocket-view"][data-preset-style="minimal"] .pocket-view-wrapper .pocket-content-container {
   border: 0px;
-  border-left: 1px solid black;
+  border-left: 1px solid var(--pocket-minimal-line-color, black);
   border-radius: 0px;
   background: transparent;
 }
