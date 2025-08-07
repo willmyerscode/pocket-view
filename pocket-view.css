@@ -311,7 +311,7 @@
   }
 
   [data-wm-plugin="pocket-view"][data-mobile-layout="accordion"] .pocket-accordion .content-item.active {
-    display: flex;
+    display: block;
   }
   [data-wm-plugin="pocket-view"][data-mobile-layout="accordion"] .pocket-accordion .content-description {
     padding: var(--pocket-accordion-content-padding, 17px);
